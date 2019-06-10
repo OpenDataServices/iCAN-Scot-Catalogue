@@ -29,14 +29,6 @@ def adminindex(request):
 
 
 @permission_required('catalogueapp.catalogueadmin', login_url='/accounts/login/')
-def admin_list(request):
-    context = {
-        'services': Service.objects.all(),
-    }
-    return render(request, 'catalogueapp/admin/list.html', context)
-
-
-@permission_required('catalogueapp.catalogueadmin', login_url='/accounts/login/')
 def admin_add(request):
     context = {}
 
@@ -57,6 +49,14 @@ def admin_add(request):
         context['form'] = AddForm()
 
     return render(request, 'catalogueapp/admin/add.html', context)
+
+
+@permission_required('catalogueapp.catalogueadmin', login_url='/accounts/login/')
+def admin_service_list(request):
+    context = {
+        'services': Service.objects.all(),
+    }
+    return render(request, 'catalogueapp/admin/services.html', context)
 
 
 @permission_required('catalogueapp.catalogueadmin', login_url='/accounts/login/')
