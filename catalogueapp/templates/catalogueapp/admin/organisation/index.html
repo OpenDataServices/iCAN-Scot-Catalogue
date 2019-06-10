@@ -49,4 +49,25 @@
     <input type="submit" value="Update ALISS data now">
 </form>
 
+<b>Services</b>
+
+
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Active?</td>
+        <td>&nbsp;</td>
+    </tr>
+    {% for service in services %}
+        <tr>
+            <td>{{ service.name }}</td>
+            <td>{% if service.name %}Yes{% else %}No{% endif %}</td>
+            <td>
+                <a href="{% url 'admin_service_index' service.aliss_id %}">View</a>
+            </td>
+        </tr>
+    {% endfor %}
+
+</table>
+
 {% endblock %}

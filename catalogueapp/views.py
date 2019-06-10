@@ -87,6 +87,7 @@ def admin_organisation_index(request, aliss_id):
     context = {
         'organisation': Organisation.objects.get(aliss_id=aliss_id),
     }
+    context['services'] = Service.objects.filter(organisation=context['organisation'])
 
     if request.method == 'POST' and request.POST['action'] == 'update':
         importer = ALISS_Importer()
