@@ -1,5 +1,6 @@
 Django==2.2.2
 requests==2.22.0
+psycopg2==2.8.2
 ## The following requirements were added by pip freeze:
 certifi==2019.3.9
 chardet==3.0.4

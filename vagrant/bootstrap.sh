@@ -6,7 +6,7 @@ echo "en_GB.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
 
 apt-get update
-apt-get install -y python3 python3-pip postgresql
+apt-get install -y python3 python3-pip postgresql libpq-dev
 
 pip3 install  virtualenv
 
