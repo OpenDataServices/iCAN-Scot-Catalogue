@@ -1,0 +1,66 @@
+{% extends "catalogueapp/base.html" %}
+
+{% block content %}
+
+<b>Organisation</b>
+
+<table>
+    <tr>
+        <td>Name</td>
+        <td>{{ organisation.name }}</td>
+    </tr>
+    <tr>
+        <td>description</td>
+        <td>{{ organisation.description }}</td>
+    </tr>
+    <tr>
+        <td>facebook</td>
+        <td>{{ organisation.facebook }}</td>
+    </tr>
+    <tr>
+        <td>twitter</td>
+        <td>{{ organisation.twitter }}</td>
+    </tr>
+    <tr>
+        <td>url</td>
+        <td>{{ organisation.url }}</td>
+    </tr>
+    <tr>
+        <td>phone</td>
+        <td>{{ organisation.phone }}</td>
+    </tr>
+    <tr>
+        <td>email</td>
+        <td>{{ organisation.email }}</td>
+    </tr>
+</table>
+
+{% for service in services %}
+    <b>Service on ALISS</b>
+
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>{{ service.name }}</td>
+        </tr>
+        <tr>
+            <td>description</td>
+            <td>{{ service.description }}</td>
+        </tr>
+        <tr>
+            <td>url</td>
+            <td>{{ service.url }}</td>
+        </tr>
+        <tr>
+            <td>phone</td>
+            <td>{{ service.phone }}</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>{{ service.email }}</td>
+        </tr>
+    </table>
+{% endfor %}
+
+
+{% endblock %}
