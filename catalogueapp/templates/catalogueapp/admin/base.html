@@ -1,0 +1,15 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        {% if user.is_authenticated %}
+        <div>
+            <a href="/accounts/logout/">Logout</a>
+        </div>
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

@@ -1,6 +1,14 @@
 from django.db import models
 
 
+class CatalogueAdminPermission(models.Model):
+    class Meta:
+        managed = False
+        permissions = (
+            ('catalogueadmin', 'Can Admin The Catalogue'),
+        )
+
+
 class Organisation(models.Model):
     aliss_id = models.UUIDField(unique=True, blank=False)
     name = models.TextField(blank=True)
