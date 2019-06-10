@@ -47,6 +47,7 @@ def admin_add(request):
             if url.is_service():
                 importer = ALISS_Importer()
                 service = importer.import_from_service_URL(url)
+                importer.update_organisation(service.organisation)
                 return redirect('admin_service_index', aliss_id=service.aliss_id)
 
             else:
@@ -67,5 +68,6 @@ def admin_service_index(request, aliss_id):
     if request.method == 'POST' and request.POST['action'] == 'update':
         importer = ALISS_Importer()
         importer.update_service(context['service'])
+        importer.update_organisation(context['service'].organisation)
 
     return render(request, 'catalogueapp/admin/service/index.html', context)

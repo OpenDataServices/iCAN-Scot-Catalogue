@@ -22,21 +22,28 @@ class ALISS_Importer:
     def import_from_service_URL(self, url):
         response = requests.get(url.get_service_api_url())
         response.raise_for_status()
-        return self._process_service_data(response.json())
-
-    def update_service(self, service):
-        response = requests.get('https://www.aliss.org/api/v4/services/' + str(service.aliss_id))
-        response.raise_for_status()
-        return self._process_service_data(response.json())
-
-    def _process_service_data(self, data):
+        data = response.json()
         try:
             service = Service.objects.get(aliss_id=data['data']['id'])
         except Service.DoesNotExist:
             service = Service()
             service.aliss_id = data['data']['id']
             service.active = True
+        self._process_service_data(service, data)
+        return service
 
+    def update_service(self, service):
+        response = requests.get('https://www.aliss.org/api/v4/services/' + str(service.aliss_id))
+        response.raise_for_status()
+        return self._process_service_data(service, response.json())
+
+    def update_organisation(self, organisation):
+        response = requests.get('https://www.aliss.org/api/v4/organisations/' + str(organisation.aliss_id))
+        response.raise_for_status()
+        return self._process_organisation_data(organisation, response.json())
+
+    def _process_service_data(self, service, data):
+        # service details
         service.name = data['data']['name']
         service.aliss_url = data['data']['aliss_url']
         service.aliss_permalink = data['data']['permalink']
@@ -45,23 +52,37 @@ class ALISS_Importer:
         service.url = data['data']['url']
         service.phone = data['data']['phone']
         service.email = data['data']['email']
-        service.organisation = self._process_organisation_data_in_service_object(data['data']['organisation'])
 
-        service.save()
-
-        return service
-
-    def _process_organisation_data_in_service_object(self, data):
+        # organisation
         try:
-            organisation = Organisation.objects.get(aliss_id=data['id'])
+            organisation = Organisation.objects.get(aliss_id=data['data']['organisation']['id'])
         except Organisation.DoesNotExist:
             organisation = Organisation()
-            organisation.aliss_id = data['id']
+            organisation.aliss_id = data['data']['organisation']['id']
 
-        organisation.name = data['name']
-        organisation.aliss_url = data['aliss_url']
-        organisation.slug = data['slug']
+        organisation.name = data['data']['organisation']['name']
+        organisation.aliss_url = data['data']['organisation']['aliss_url']
+        organisation.slug = data['data']['organisation']['slug']
 
         organisation.save()
 
-        return organisation
+        service.organisation = organisation
+
+        # finally, save
+        service.save()
+
+    def _process_organisation_data(self, organisation, data):
+        # organisation details
+        organisation.name = data['data']['name']
+        organisation.aliss_url = data['data']['aliss_url']
+        organisation.aliss_permalink = data['data']['permalink']
+        organisation.slug = data['data']['slug']
+        organisation.description = data['data']['description']
+        organisation.facebook = data['data']['facebook']
+        organisation.twitter = data['data']['twitter']
+        organisation.url = data['data']['url']
+        organisation.phone = data['data']['phone']
+        organisation.email = data['data']['email']
+
+        # finally, save
+        organisation.save()
