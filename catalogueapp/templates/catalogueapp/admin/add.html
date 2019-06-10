@@ -1,0 +1,16 @@
+{% extends "catalogueapp/admin/base.html" %}
+
+{% block content %}
+
+<p>
+    Please enter a URL of the service you wish to add - like https://www.aliss.org/services/balerno-ramblers-group-0/
+</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Add">
+</form>
+
+
+{% endblock %}
