@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import permission_required
 from catalogueapp.forms import AddForm
@@ -36,8 +36,8 @@ def admin_add(request):
             if url.is_service():
                 importer = ALISS_Importer()
                 service = importer.import_from_service_URL(url)
-                print(service.id)
-                print("DONE")
+                return redirect('admin_service_index', aliss_id=service.aliss_id)
+
             else:
                 context['form'].add_error('url', "That does not look like a service URL?")
 
