@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import permission_required
 from catalogueapp.forms import AddForm
 from catalogueapp.tools import ALISS_URL, ALISS_Importer
+from catalogueapp.models import Service
 
 
 def index(request):
@@ -14,6 +15,14 @@ def index(request):
 def adminindex(request):
     context = {}
     return render(request, 'catalogueapp/admin/index.html', context)
+
+
+@permission_required('catalogueapp.catalogueadmin', login_url='/accounts/login/')
+def admin_list(request):
+    context = {
+        'services': Service.objects.all(),
+    }
+    return render(request, 'catalogueapp/admin/list.html', context)
 
 
 @permission_required('catalogueapp.catalogueadmin', login_url='/accounts/login/')
