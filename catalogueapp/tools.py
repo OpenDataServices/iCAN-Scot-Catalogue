@@ -24,6 +24,11 @@ class ALISS_Importer:
         response.raise_for_status()
         return self._process_service_data(response.json())
 
+    def update_service(self, service):
+        response = requests.get('https://www.aliss.org/api/v4/services/' + str(service.aliss_id))
+        response.raise_for_status()
+        return self._process_service_data(response.json())
+
     def _process_service_data(self, data):
         try:
             service = Service.objects.get(aliss_id=data['data']['id'])

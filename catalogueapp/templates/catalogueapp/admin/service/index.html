@@ -80,4 +80,10 @@
     </tr>
 </table>
 
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="update">
+    <input type="submit" value="Update ALISS data now">
+</form>
+
 {% endblock %}
