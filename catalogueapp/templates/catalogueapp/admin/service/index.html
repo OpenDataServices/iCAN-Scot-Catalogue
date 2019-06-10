@@ -1,0 +1,83 @@
+{% extends "catalogueapp/admin/base.html" %}
+
+{% block content %}
+
+<b>Service on ALISS</b>
+
+<table>
+    <tr>
+        <td>Name</td>
+        <td>{{ service.name }}</td>
+    </tr>
+    <tr>
+        <td>description</td>
+        <td>{{ service.description }}</td>
+    </tr>
+    <tr>
+        <td>url</td>
+        <td>{{ service.url }}</td>
+    </tr>
+    <tr>
+        <td>phone</td>
+        <td>{{ service.phone }}</td>
+    </tr>
+    <tr>
+        <td>email</td>
+        <td>{{ service.email }}</td>
+    </tr>
+    <tr>
+        <td>aliss_url</td>
+        <td>{{ service.aliss_url }}</td>
+    </tr>
+    <tr>
+        <td>aliss_permalink</td>
+        <td>{{ service.aliss_permalink }}</td>
+    </tr>
+    <tr>
+        <td>active</td>
+        <td{% if service.name %}Yes{% else %}No{% endif %}</td>
+    </tr>
+</table>
+
+<b>Organisation on ALISS</b>
+
+<table>
+    <tr>
+        <td>Name</td>
+        <td>{{ service.organisation.name }}</td>
+    </tr>
+    <tr>
+        <td>description</td>
+        <td>{{ service.organisation.description }}</td>
+    </tr>
+    <tr>
+        <td>facebook</td>
+        <td>{{ service.organisation.facebook }}</td>
+    </tr>
+    <tr>
+        <td>twitter</td>
+        <td>{{ service.organisation.twitter }}</td>
+    </tr>
+    <tr>
+        <td>url</td>
+        <td>{{ service.organisation.url }}</td>
+    </tr>
+    <tr>
+        <td>phone</td>
+        <td>{{ service.organisation.phone }}</td>
+    </tr>
+    <tr>
+        <td>email</td>
+        <td>{{ service.organisation.email }}</td>
+    </tr>
+    <tr>
+        <td>aliss_url</td>
+        <td>{{ service.organisation.aliss_url }}</td>
+    </tr>
+    <tr>
+        <td>aliss_permalink</td>
+        <td>{{ service.organisation.aliss_permalink }}</td>
+    </tr>
+</table>
+
+{% endblock %}

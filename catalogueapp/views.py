@@ -45,3 +45,11 @@ def admin_add(request):
         context['form'] = AddForm()
 
     return render(request, 'catalogueapp/admin/add.html', context)
+
+
+@permission_required('catalogueapp.catalogueadmin', login_url='/accounts/login/')
+def admin_service_index(request, aliss_id):
+    context = {
+        'service': Service.objects.get(aliss_id=aliss_id),
+    }
+    return render(request, 'catalogueapp/admin/service/index.html', context)

@@ -15,7 +15,7 @@
             <td>{{ service.organisation.name }}</td>
             <td>{% if service.name %}Yes{% else %}No{% endif %}</td>
             <td>
-
+                <a href="{% url 'admin_service_index' service.aliss_id %}">View</a>
             </td>
         </tr>
     {% endfor %}
