@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.contrib.auth.decorators import permission_required
 from catalogueapp.forms import AddForm
 from catalogueapp.tools import ALISS_URL, ALISS_Importer
@@ -17,7 +17,8 @@ def service_index(request, aliss_id):
     context = {
         'service': Service.objects.get(aliss_id=aliss_id),
     }
-    # TODO error if service is not active
+    if not context['service'].active:
+        raise Http404
     return render(request, 'catalogueapp/service/index.html', context)
 
 
