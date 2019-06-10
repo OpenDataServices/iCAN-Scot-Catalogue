@@ -39,6 +39,12 @@
     </tr>
 </table>
 
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="update">
+    <input type="submit" value="Update ALISS data now">
+</form>
+
 <b>Organisation on ALISS</b>
 
 <table>
@@ -47,43 +53,14 @@
         <td>{{ service.organisation.name }}</td>
     </tr>
     <tr>
-        <td>description</td>
-        <td>{{ service.organisation.description }}</td>
-    </tr>
-    <tr>
-        <td>facebook</td>
-        <td>{{ service.organisation.facebook }}</td>
-    </tr>
-    <tr>
-        <td>twitter</td>
-        <td>{{ service.organisation.twitter }}</td>
-    </tr>
-    <tr>
-        <td>url</td>
-        <td>{{ service.organisation.url }}</td>
-    </tr>
-    <tr>
-        <td>phone</td>
-        <td>{{ service.organisation.phone }}</td>
-    </tr>
-    <tr>
-        <td>email</td>
-        <td>{{ service.organisation.email }}</td>
-    </tr>
-    <tr>
-        <td>aliss_url</td>
-        <td>{{ service.organisation.aliss_url }}</td>
-    </tr>
-    <tr>
         <td>aliss_permalink</td>
         <td>{{ service.organisation.aliss_permalink }}</td>
     </tr>
+    <tr>
+        <td>more</td>
+        <td><a href="{% url 'admin_organisation_index' service.organisation.aliss_id %}">View Organisation</a></td>
+    </tr>
 </table>
 
-<form method="post">
-    {% csrf_token %}
-    <input type="hidden" name="action" value="update">
-    <input type="submit" value="Update ALISS data now">
-</form>
 
 {% endblock %}

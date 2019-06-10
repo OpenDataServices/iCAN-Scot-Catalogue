@@ -1,0 +1,20 @@
+{% extends "catalogueapp/admin/base.html" %}
+
+{% block content %}
+
+<table>
+    <tr>
+        <td>Name</td>
+        <td>&nbsp;</td>
+    </tr>
+    {% for organisation in organisations %}
+        <tr>
+            <td>{{ organisation.name }}</td>
+            <td>
+                <a href="{% url 'admin_organisation_index' organisation.aliss_id %}">View Organisation</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

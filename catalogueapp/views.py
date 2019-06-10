@@ -3,7 +3,7 @@ from django.http import HttpResponse, Http404
 from django.contrib.auth.decorators import permission_required
 from catalogueapp.forms import AddForm
 from catalogueapp.tools import ALISS_URL, ALISS_Importer
-from catalogueapp.models import Service
+from catalogueapp.models import Service, Organisation
 
 
 def index(request):
@@ -68,6 +68,26 @@ def admin_service_index(request, aliss_id):
     if request.method == 'POST' and request.POST['action'] == 'update':
         importer = ALISS_Importer()
         importer.update_service(context['service'])
-        importer.update_organisation(context['service'].organisation)
 
     return render(request, 'catalogueapp/admin/service/index.html', context)
+
+
+@permission_required('catalogueapp.catalogueadmin', login_url='/accounts/login/')
+def admin_organisation_list(request):
+    context = {
+        'organisations': Organisation.objects.all(),
+    }
+    return render(request, 'catalogueapp/admin/organisations.html', context)
+
+
+@permission_required('catalogueapp.catalogueadmin', login_url='/accounts/login/')
+def admin_organisation_index(request, aliss_id):
+    context = {
+        'organisation': Organisation.objects.get(aliss_id=aliss_id),
+    }
+
+    if request.method == 'POST' and request.POST['action'] == 'update':
+        importer = ALISS_Importer()
+        importer.update_organisation(context['organisation'])
+
+    return render(request, 'catalogueapp/admin/organisation/index.html', context)
