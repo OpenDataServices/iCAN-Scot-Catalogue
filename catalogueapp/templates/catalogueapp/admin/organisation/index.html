@@ -61,7 +61,7 @@
     {% for service in services %}
         <tr>
             <td>{{ service.name }}</td>
-            <td>{% if service.name %}Yes{% else %}No{% endif %}</td>
+            <td>{% if service.active %}Yes{% else %}No{% endif %}</td>
             <td>
                 <a href="{% url 'admin_service_index' service.aliss_id %}">View</a>
             </td>
