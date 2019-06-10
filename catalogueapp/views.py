@@ -7,8 +7,18 @@ from catalogueapp.models import Service
 
 
 def index(request):
-    context = {}
+    context = {
+        'services': Service.objects.filter(active=True),
+    }
     return render(request, 'catalogueapp/index.html', context)
+
+
+def service_index(request, aliss_id):
+    context = {
+        'service': Service.objects.get(aliss_id=aliss_id),
+    }
+    # TODO error if service is not active
+    return render(request, 'catalogueapp/service/index.html', context)
 
 
 @permission_required('catalogueapp.catalogueadmin', login_url='/accounts/login/')

@@ -1,2 +1,24 @@
-INDEX
+{% extends "catalogueapp/base.html" %}
 
+{% block content %}
+
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Organisation</td>
+        <td>Active?</td>
+        <td>&nbsp;</td>
+    </tr>
+    {% for service in services %}
+        <tr>
+            <td>{{ service.name }}</td>
+            <td>{{ service.organisation.name }}</td>
+            <td>{% if service.name %}Yes{% else %}No{% endif %}</td>
+            <td>
+                <a href="{% url 'service_index' service.aliss_id %}">View</a>
+            </td>
+        </tr>
+    {% endfor %}
+
+</table>
+{% endblock %}
