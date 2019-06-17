@@ -2,12 +2,15 @@
 
 {% block content %}
 
-<table>
+
+<h2>Services</h2>
+
+<table class="table">
     <tr>
-        <td>Name</td>
-        <td>Organisation</td>
-        <td>Active?</td>
-        <td>&nbsp;</td>
+        <th>Name</th>
+        <th>Organisation</th>
+        <th>Active?</th>
+        <th>&nbsp;</th>
     </tr>
     {% for service in services %}
         <tr>
@@ -15,7 +18,7 @@
             <td>{{ service.organisation.name }}</td>
             <td>{% if service.active %}Yes{% else %}No{% endif %}</td>
             <td>
-                <a href="{% url 'admin_service_index' service.aliss_id %}">View Service</a>
+                <a href="{% url 'admin_service_index' service.aliss_id %}" class="btn btn-primary">View</a>
             </td>
         </tr>
     {% endfor %}

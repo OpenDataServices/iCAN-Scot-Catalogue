@@ -2,43 +2,44 @@
 
 {% block content %}
 
-<b>Organisation on ALISS</b>
 
-<table>
+<h2>Organisation</h2>
+
+<table class="table">
     <tr>
-        <td>Name</td>
+        <th>Name</th>
         <td>{{ organisation.name }}</td>
     </tr>
     <tr>
-        <td>description</td>
+        <th>Description</th>
         <td>{{ organisation.description }}</td>
     </tr>
     <tr>
-        <td>facebook</td>
+        <th>Facebook</th>
         <td>{{ organisation.facebook }}</td>
     </tr>
     <tr>
-        <td>twitter</td>
+        <th>Twitter</th>
         <td>{{ organisation.twitter }}</td>
     </tr>
     <tr>
-        <td>url</td>
+        <th>URL</th>
         <td>{{ organisation.url }}</td>
     </tr>
     <tr>
-        <td>phone</td>
+        <th>Phone</th>
         <td>{{ organisation.phone }}</td>
     </tr>
     <tr>
-        <td>email</td>
+        <th>E-mail</th>
         <td>{{ organisation.email }}</td>
     </tr>
     <tr>
-        <td>aliss_url</td>
+        <th>ALISS URL</th>
         <td>{{ organisation.aliss_url }}</td>
     </tr>
     <tr>
-        <td>aliss_permalink</td>
+        <th>ALISS Permalink</th>
         <td>{{ organisation.aliss_permalink }}</td>
     </tr>
 </table>
@@ -46,24 +47,24 @@
 <form method="post">
     {% csrf_token %}
     <input type="hidden" name="action" value="update">
-    <input type="submit" value="Update ALISS data now">
+    <input type="submit" value="Update ALISS data now"  class="btn btn-primary">
 </form>
 
-<b>Services</b>
+<h2>Services</h2>
 
 
-<table>
+<table class="table">
     <tr>
-        <td>Name</td>
-        <td>Active?</td>
-        <td>&nbsp;</td>
+        <th>Name</th>
+        <th>Active?</th>
+        <th>&nbsp;</th>
     </tr>
     {% for service in services %}
         <tr>
             <td>{{ service.name }}</td>
             <td>{% if service.active %}Yes{% else %}No{% endif %}</td>
             <td>
-                <a href="{% url 'admin_service_index' service.aliss_id %}">View</a>
+                <a href="{% url 'admin_service_index' service.aliss_id %}" class="btn btn-primary">View Service</a>
             </td>
         </tr>
     {% endfor %}

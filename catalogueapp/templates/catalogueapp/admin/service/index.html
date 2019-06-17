@@ -2,39 +2,39 @@
 
 {% block content %}
 
-<b>Service on ALISS</b>
+<h2>Service</h2>
 
-<table>
+<table class="table">
     <tr>
-        <td>Name</td>
+        <th>Name</th>
         <td>{{ service.name }}</td>
     </tr>
     <tr>
-        <td>description</td>
+        <th>Description</th>
         <td>{{ service.description }}</td>
     </tr>
     <tr>
-        <td>url</td>
+        <th>URL</th>
         <td>{{ service.url }}</td>
     </tr>
     <tr>
-        <td>phone</td>
+        <th>Phone</th>
         <td>{{ service.phone }}</td>
     </tr>
     <tr>
-        <td>email</td>
+        <th>E-mail</th>
         <td>{{ service.email }}</td>
     </tr>
     <tr>
-        <td>aliss_url</td>
+        <th>ALISS URL</th>
         <td>{{ service.aliss_url }}</td>
     </tr>
     <tr>
-        <td>aliss_permalink</td>
+        <th>ALISS Permalink</th>
         <td>{{ service.aliss_permalink }}</td>
     </tr>
     <tr>
-        <td>active</td>
+        <th>Active</th>
         <td>{% if service.active %}Yes{% else %}No{% endif %}</td>
     </tr>
 </table>
@@ -42,23 +42,23 @@
 <form method="post">
     {% csrf_token %}
     <input type="hidden" name="action" value="update">
-    <input type="submit" value="Update ALISS data now">
+    <input type="submit" value="Update ALISS data now" class="btn btn-primary">
 </form>
 
-<b>Organisation on ALISS</b>
+<h2>Organisation</h2>
 
-<table>
+<table class="table">
     <tr>
-        <td>Name</td>
+        <th>Name</th>
         <td>{{ service.organisation.name }}</td>
     </tr>
     <tr>
-        <td>aliss_permalink</td>
+        <th>aliss_permalink</th>
         <td>{{ service.organisation.aliss_permalink }}</td>
     </tr>
     <tr>
-        <td>more</td>
-        <td><a href="{% url 'admin_organisation_index' service.organisation.aliss_id %}">View Organisation</a></td>
+        <th>more</th>
+        <td><a href="{% url 'admin_organisation_index' service.organisation.aliss_id %}" class="btn btn-primary">View Organisation</a></td>
     </tr>
 </table>
 

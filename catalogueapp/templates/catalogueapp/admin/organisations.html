@@ -2,16 +2,18 @@
 
 {% block content %}
 
-<table>
+<h2>Organisations</h2>
+
+<table class="table">
     <tr>
-        <td>Name</td>
-        <td>&nbsp;</td>
+        <th>Name</th>
+        <th>&nbsp;</th>
     </tr>
     {% for organisation in organisations %}
         <tr>
             <td>{{ organisation.name }}</td>
             <td>
-                <a href="{% url 'admin_organisation_index' organisation.aliss_id %}">View Organisation</a>
+                <a href="{% url 'admin_organisation_index' organisation.aliss_id %}" class="btn btn-primary">View</a>
             </td>
         </tr>
     {% endfor %}

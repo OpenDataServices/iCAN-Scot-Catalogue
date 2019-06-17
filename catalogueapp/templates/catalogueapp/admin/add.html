@@ -8,8 +8,10 @@
 
 <form method="post">
     {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Add">
+    <div>
+        {{ form }}
+    </div>
+    <input type="submit" value="Add" class="btn btn-primary">
 </form>
 
 
