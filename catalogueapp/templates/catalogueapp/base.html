@@ -1,9 +1,44 @@
+<!DOCTYPE html>
 <html>
     <head>
-
+        <meta charset="UTF-8">
+        <title>{% block htmltitle %}Catalogue - iCAN{% endblock %}</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static "style.css" %}">
     </head>
     <body>
-        {% block content %}
-        {% endblock %}
+        <div class="wrapper">
+
+            <header>
+                <div class="menusLeft">
+                    <div class="menuItem">
+                        <a href="https://www.ican.scot/our-aims">AIMS</a>
+                    </div>
+                    <div class="menuItem">
+                        <a href="/">CATALOGUE</a>
+                    </div>
+                </div>
+                <div class="menusRight">
+                    <div class="menuItem">
+                        <a href="https://www.ican.scot/new-page-2">CONTACT</a>
+                    </div>
+                    <div class="menuItem">
+                        <a href="https://www.ican.scot/new-page-1">JOIN US</a>
+                    </div>
+                </div>
+                <h1>iCAN</h1>
+            </header>
+
+            {% block content %}
+            {% endblock %}
+
+            <footer>
+                <div class="menusCenter">
+                    <div class="menuItem">
+                        <a href="https://www.ican.scot/privacy-policy">PRIVACY POLICY AND COOKIES</a>
+                    </div>
+                </div>
+            </footer>
+        </div>
     </body>
 </html>

@@ -1,0 +1,38 @@
+.wrapper {
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+header {
+    display: block;
+    margin-bottom: 100px;
+}
+header::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+header h1 {
+    text-align: center;
+}
+.menusLeft {
+    float: left;
+}
+.menusRight {
+    float: right;
+}
+.menusCenter {
+    text-align: center;
+}
+.menuItem {
+    display: inline;
+    padding: 0 20px;
+}
+
+footer {
+margin-top: 100px;
+}
+.organisationList .organisation {
+    padding: 10px 0;
+}
+

@@ -2,21 +2,12 @@
 
 {% block content %}
 
-<table>
-    <tr>
-        <td>Name</td>
-        <td>Organisation</td>
-        <td>&nbsp;</td>
-    </tr>
-    {% for service in services %}
-        <tr>
-            <td>{{ service.name }}</td>
-            <td>{{ service.organisation.name }}</td>
-            <td>
-                <a href="{% url 'organisation_index' service.organisation.aliss_id %}">View</a>
-            </td>
-        </tr>
-    {% endfor %}
+    <div class="organisationList">
+        {% for service in services %}
+            <div class="organisation">
+                <div><a href="{% url 'organisation_index' service.organisation.aliss_id %}">{{ service.organisation.name }}</a></div>
+            </div>
+        {% endfor %}
+    </div>
 
-</table>
 {% endblock %}
