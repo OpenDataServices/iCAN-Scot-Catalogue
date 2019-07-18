@@ -1,5 +1,6 @@
 import requests
-from catalogueapp.models import Service, Organisation
+from catalogueapp.models import Service, Organisation, ALISSMeta
+import json
 
 
 class ALISS_URL:
@@ -36,12 +37,16 @@ class ALISS_Importer:
     def update_service(self, service):
         response = requests.get('https://www.aliss.org/api/v4/services/' + str(service.aliss_id))
         response.raise_for_status()
-        return self._process_service_data(service, response.json())
+        data = response.json()
+        self._process_service_data(service, data)
+        self._process_meta(data)
 
     def update_organisation(self, organisation):
         response = requests.get('https://www.aliss.org/api/v4/organisations/' + str(organisation.aliss_id))
         response.raise_for_status()
-        return self._process_organisation_data(organisation, response.json())
+        data = response.json()
+        self._process_organisation_data(organisation, data)
+        self._process_meta(data)
 
     def _process_service_data(self, service, data):
         # service details
@@ -87,3 +92,13 @@ class ALISS_Importer:
 
         # finally, save
         organisation.save()
+
+    def _process_meta(self, data):
+        try:
+            meta = ALISSMeta.objects.get()
+        except ALISSMeta.DoesNotExist:
+            meta = ALISSMeta()
+
+        meta.licence = data['meta']['licence']
+        meta.attribution = json.dumps(data['meta']['attribution'])
+        meta.save()

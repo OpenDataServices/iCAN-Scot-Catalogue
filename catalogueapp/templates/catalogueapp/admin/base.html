@@ -37,7 +37,15 @@
             </div>
 
             <div style="text-align: right; color: #333;">
-                <a href="https://github.com/OpenDataServices/iCAN-Scot-Catalogue">Open Source</a>
+                <div><a href="https://github.com/OpenDataServices/iCAN-Scot-Catalogue">Open Source</a></div>
+                {% if aliss_meta %}
+                    <div>
+                        ALISS Data <a href="{{ aliss_meta.licence }}" target="_blank" rel="nofollow">Licence</a>.
+                        {% for attr in aliss_meta.get_attribution_list %}
+                            <a href="{{ attr.url }}" target="_blank" rel="nofollow">{{ attr.text }}</a>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
         </div>
 

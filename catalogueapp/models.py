@@ -1,4 +1,5 @@
 from django.db import models
+import json
 
 
 class CatalogueAdminPermission(models.Model):
@@ -38,3 +39,16 @@ class Service(models.Model):
     phone = models.TextField(blank=True)
     email = models.EmailField(blank=True)
     active = models.BooleanField(blank=False)
+
+
+class ALISSMeta(models.Model):
+    # attribution is actually a JSON block.
+    # But we don't need to do any database operations within that JSON, so we'll leave it as TextField for maximum DB compatibility. # noqa
+    attribution = models.TextField(blank=True)
+    licence = models.TextField(blank=True)
+
+    def get_attribution_list(self):
+        if self.attribution:
+            return json.loads(self.attribution)
+        else:
+            return []

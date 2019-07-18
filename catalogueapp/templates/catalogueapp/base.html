@@ -36,6 +36,12 @@
                 <div class="menusCenter">
                     <div class="menuItem">
                         <a href="https://www.ican.scot/privacy-policy">PRIVACY POLICY AND COOKIES</a>
+                        {% if aliss_meta %}
+                            ALISS Data <a href="{{ aliss_meta.licence }}" target="_blank" rel="nofollow">Licence</a>.
+                            {% for attr in aliss_meta.get_attribution_list %}
+                                <a href="{{ attr.url }}" target="_blank" rel="nofollow">{{ attr.text }}</a>
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
             </footer>
