@@ -1,13 +1,14 @@
 import requests
 from catalogueapp.models import Service, Organisation
 
+
 class ALISS_URL:
     def __init__(self, url):
         self.url = url
         self.url_bits = url.split('/')
 
     def is_service(self):
-        #TODO
+        # TODO
         return True
 
     def get_service_api_url(self):

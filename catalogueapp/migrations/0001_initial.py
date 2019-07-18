@@ -53,7 +53,7 @@ class Migration(migrations.Migration):
                 ('phone', models.TextField(blank=True)),
                 ('email', models.EmailField(blank=True, max_length=254)),
                 ('active', models.BooleanField()),
-                ('organisation', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='catalogueapp.Organisation')),
+                ('organisation', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='catalogueapp.Organisation')),  # noqa
             ],
         ),
     ]

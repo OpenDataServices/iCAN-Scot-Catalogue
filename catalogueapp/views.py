@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, Http404
+from django.http import Http404
 from django.contrib.auth.decorators import permission_required, login_required
 from catalogueapp.forms import AddForm
 from catalogueapp.tools import ALISS_URL, ALISS_Importer
@@ -100,4 +100,3 @@ def admin_organisation_index(request, aliss_id):
 def user_profile(request):
     context = {}
     return render(request, 'registration/profile.html', context)
-
