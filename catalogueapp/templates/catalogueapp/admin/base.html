@@ -17,9 +17,11 @@
                     </h1>
                     <div style="text-align: right;">
                         {% if user.is_authenticated %}
-                            <a href="/catalogueadmin/add">Add</a> |
-                            <a href="{% url 'admin_organisation_list'  %}">List Organisations</a> |
-                            <a href="{% url 'admin_service_list'  %}">List Services</a> |
+                            {% if perms.catalogueapp.catalogueadmin %}
+                                <a href="/catalogueadmin/add">Add</a> |
+                                <a href="{% url 'admin_organisation_list'  %}">List Organisations</a> |
+                                <a href="{% url 'admin_service_list'  %}">List Services</a> |
+                            {% endif %}
                             <a href="/accounts/logout/">Logout</a>
                         {% else %}
                             <a href="/accounts/login/">Login</a>
