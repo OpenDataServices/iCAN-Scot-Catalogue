@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
-from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import permission_required, login_required
 from catalogueapp.forms import AddForm
 from catalogueapp.tools import ALISS_URL, ALISS_Importer
 from catalogueapp.models import Service, Organisation
@@ -94,3 +94,10 @@ def admin_organisation_index(request, aliss_id):
         importer.update_organisation(context['organisation'])
 
     return render(request, 'catalogueapp/admin/organisation/index.html', context)
+
+
+@login_required()
+def user_profile(request):
+    context = {}
+    return render(request, 'registration/profile.html', context)
+
