@@ -11,6 +11,7 @@ urlpatterns = [
     path('catalogueadmin/service/<aliss_id>', views.admin_service_index, name='admin_service_index'),
     path('catalogueadmin/organisation', views.admin_organisation_list, name='admin_organisation_list'),
     path('catalogueadmin/organisation/<aliss_id>', views.admin_organisation_index, name='admin_organisation_index'),
+    path('catalogueadmin/organisation/<aliss_id>/edit', views.admin_organisation_edit, name='admin_organisation_edit'),
     path('accounts/profile/', views.user_profile, name='user_profile'),
 
 ]

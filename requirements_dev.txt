@@ -1,12 +1,14 @@
 Django==2.2.3
 requests==2.22.0
 psycopg2==2.8.3
+commonmark==0.9.0
 
 flake8==3.7.8
 ## The following requirements were added by pip freeze:
 certifi==2019.6.16
 chardet==3.0.4
 entrypoints==0.3
+future==0.17.1
 idna==2.8
 mccabe==0.6.1
 pycodestyle==2.5.0

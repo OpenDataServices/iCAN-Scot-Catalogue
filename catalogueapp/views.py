@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import Http404
 from django.contrib.auth.decorators import permission_required, login_required
-from catalogueapp.forms import AddForm
+from catalogueapp.forms import AddForm, EditOrganisationForm
 from catalogueapp.tools import ALISS_URL, ALISS_Importer
 from catalogueapp.models import Service, Organisation
 
@@ -94,6 +94,25 @@ def admin_organisation_index(request, aliss_id):
         importer.update_organisation(context['organisation'])
 
     return render(request, 'catalogueapp/admin/organisation/index.html', context)
+
+
+@permission_required('catalogueapp.catalogueadmin', login_url='/accounts/login/')
+def admin_organisation_edit(request, aliss_id):
+    context = {
+        'organisation': Organisation.objects.get(aliss_id=aliss_id),
+    }
+
+    if request.method == 'POST':
+        context['form'] = EditOrganisationForm(request.POST, instance=context['organisation'])
+        if context['form'].is_valid():
+            context['organisation'].our_description_markdown = context['form'].cleaned_data['our_description_markdown']
+            context['organisation'].save()
+            return redirect('admin_organisation_index', aliss_id=context['organisation'].aliss_id)
+
+    else:
+        context['form'] = EditOrganisationForm(instance=context['organisation'])
+
+    return render(request, 'catalogueapp/admin/organisation/edit.html', context)
 
 
 @login_required()

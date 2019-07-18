@@ -1,5 +1,6 @@
 from django.db import models
 import json
+import commonmark
 
 
 class CatalogueAdminPermission(models.Model):
@@ -22,6 +23,10 @@ class Organisation(models.Model):
     url = models.URLField(blank=True)
     phone = models.TextField(blank=True)
     email = models.EmailField(blank=True)
+    our_description_markdown = models.TextField(blank=True)
+
+    def get_our_description_markdown_html(self):
+        return commonmark.commonmark(self.our_description_markdown)
 
 
 class Service(models.Model):

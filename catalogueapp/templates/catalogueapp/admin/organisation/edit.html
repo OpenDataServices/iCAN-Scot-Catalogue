@@ -1,0 +1,17 @@
+{% extends "catalogueapp/admin/base.html" %}
+
+{% block content %}
+
+    <form method="post" action="">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>{{ form.our_description_markdown.label_tag }}</td>
+                <td>{{ form.our_description_markdown }}</td>
+            </tr>
+        </table>
+
+        <input type="submit" value="Save">
+    </form>
+
+{% endblock %}

@@ -11,6 +11,14 @@
         <td>{{ organisation.name }}</td>
     </tr>
     <tr>
+        <th>Our Description (Markdown)</th>
+        <td>{{ organisation.our_description_markdown | linebreaks }}</td>
+    </tr>
+    <tr>
+        <th>Our Description (Preview)</th>
+        <td>{{ organisation.get_our_description_markdown_html | safe }}</td>
+    </tr>
+    <tr>
         <th>Description</th>
         <td>{{ organisation.description }}</td>
     </tr>
@@ -43,6 +51,9 @@
         <td>{{ organisation.aliss_permalink }}</td>
     </tr>
 </table>
+
+<a href="{% url 'admin_organisation_edit' organisation.aliss_id %}" class="btn btn-primary">Edit</a>
+
 
 <form method="post">
     {% csrf_token %}

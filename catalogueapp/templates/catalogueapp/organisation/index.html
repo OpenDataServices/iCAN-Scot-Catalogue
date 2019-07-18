@@ -11,7 +11,7 @@
 
 <h3>Evidence Base</h3>
 
-TODO
+{{ organisation.get_our_description_markdown_html | safe }}
 
 {% for service in services %}
     <h3>{{ service.name }}</h3>
