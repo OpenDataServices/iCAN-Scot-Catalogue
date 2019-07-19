@@ -26,15 +26,15 @@
     </tr>
     <tr>
         <th>Facebook</th>
-        <td>{{ organisation.facebook }}</td>
+        <td>{% if organisation.facebook %}<a href="{{ organisation.facebook }}" target="_blank">{{ organisation.facebook }}</a>{% endif %}</td>
     </tr>
     <tr>
         <th>Twitter</th>
-        <td>{{ organisation.twitter }}</td>
+        <td>{% if organisation.twitter %}<a href="{{ organisation.twitter }}" target="_blank">{{ organisation.twitter }}</a>{% endif %}</td>
     </tr>
     <tr>
         <th>URL</th>
-        <td>{{ organisation.url }}</td>
+        <td>{% if organisation.url %}<a href="{{ organisation.url }}" target="_blank">{{ organisation.url }}</a>{% endif %}</td>
     </tr>
     <tr>
         <th>Phone</th>
@@ -42,15 +42,15 @@
     </tr>
     <tr>
         <th>E-mail</th>
-        <td>{{ organisation.email }}</td>
+        <td>{% if organisation.email %}<a href="mailto:{{ organisation.email }}">{{ organisation.email }}</a>{% endif %}</td>
     </tr>
     <tr>
         <th>ALISS URL</th>
-        <td>{{ organisation.aliss_url }}</td>
+        <td><a href="{{ organisation.aliss_url }}" target="_blank">{{ organisation.aliss_url }}</a></td>
     </tr>
     <tr>
         <th>ALISS Permalink</th>
-        <td>{{ organisation.aliss_permalink }}</td>
+        <td><a href="{{ organisation.aliss_permalink }}" target="_blank">{{ organisation.aliss_permalink }}</a></td>
     </tr>
 </table>
 

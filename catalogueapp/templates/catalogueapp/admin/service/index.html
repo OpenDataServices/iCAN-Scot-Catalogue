@@ -17,7 +17,7 @@
     </tr>
     <tr>
         <th>URL</th>
-        <td>{{ service.url }}</td>
+        <td>{% if service.url %}<a href="{{ service.url }}" target="_blank">{{ service.url }}</a>{% endif %}</td>
     </tr>
     <tr>
         <th>Phone</th>
@@ -25,15 +25,15 @@
     </tr>
     <tr>
         <th>E-mail</th>
-        <td>{{ service.email }}</td>
+        <td>{% if service.email %}<a href="mailto:{{ service.email }}">{{ service.email }}</a>{% endif %}</td>
     </tr>
     <tr>
         <th>ALISS URL</th>
-        <td>{{ service.aliss_url }}</td>
+        <td><a href="{{ service.aliss_url }}" target="_blank">{{ service.aliss_url }}</a></td>
     </tr>
     <tr>
         <th>ALISS Permalink</th>
-        <td>{{ service.aliss_permalink }}</td>
+        <td><a href="{{ service.aliss_permalink }}" target="_blank">{{ service.aliss_permalink }}</a></td>
     </tr>
     <tr>
         <th>Active</th>
@@ -56,7 +56,7 @@
     </tr>
     <tr>
         <th>aliss_permalink</th>
-        <td>{{ service.organisation.aliss_permalink }}</td>
+        <td><a href="{{ service.organisation.aliss_permalink }}" target="_blank">{{ service.organisation.aliss_permalink }}</a></td>
     </tr>
     <tr>
         <th>more</th>
