@@ -4,15 +4,28 @@ psycopg2==2.8.3
 commonmark==0.9.0
 
 flake8==3.7.8
+pytest==5.0.1
+pytest-django==3.5.1
 ## The following requirements were added by pip freeze:
+atomicwrites==1.3.0
+attrs==19.1.0
 certifi==2019.6.16
 chardet==3.0.4
 entrypoints==0.3
 future==0.17.1
 idna==2.8
+importlib-metadata==0.18
 mccabe==0.6.1
+more-itertools==7.1.0
+packaging==19.0
+pluggy==0.12.0
+py==1.8.0
 pycodestyle==2.5.0
 pyflakes==2.1.1
+pyparsing==2.4.0
 pytz==2019.1
+six==1.12.0
 sqlparse==0.3.0
 urllib3==1.25.3
+wcwidth==0.1.7
+zipp==0.5.2

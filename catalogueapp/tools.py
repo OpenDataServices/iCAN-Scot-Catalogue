@@ -9,8 +9,7 @@ class ALISS_URL:
         self.url_bits = url.split('/')
 
     def is_service(self):
-        # TODO
-        return True
+        return self.url.startswith('https://www.aliss.org/services/')
 
     def get_service_api_url(self):
         if self.is_service():

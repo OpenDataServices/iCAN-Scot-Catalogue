@@ -1,2 +1,4 @@
 -r requirements.in
 flake8
+pytest
+pytest-django
