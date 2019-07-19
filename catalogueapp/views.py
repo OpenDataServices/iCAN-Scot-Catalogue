@@ -67,9 +67,16 @@ def admin_service_index(request, aliss_id):
         'service': Service.objects.get(aliss_id=aliss_id),
     }
 
-    if request.method == 'POST' and request.POST['action'] == 'update':
-        importer = ALISS_Importer()
-        importer.update_service(context['service'])
+    if request.method == 'POST':
+        if request.POST['action'] == 'update':
+            importer = ALISS_Importer()
+            importer.update_service(context['service'])
+        elif request.POST['action'] == 'inactive':
+            context['service'].active = False
+            context['service'].save()
+        elif request.POST['action'] == 'active':
+            context['service'].active = True
+            context['service'].save()
 
     return render(request, 'catalogueapp/admin/service/index.html', context)
 

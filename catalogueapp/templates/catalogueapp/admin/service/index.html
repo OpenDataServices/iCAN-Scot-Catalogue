@@ -41,6 +41,20 @@
     </tr>
 </table>
 
+
+<form method="post">
+    {% csrf_token %}
+    {% if service.active %}
+        <input type="hidden" name="action" value="inactive">
+        <input type="submit" value="Make Inactive" class="btn btn-primary">
+    {% else %}
+        <input type="hidden" name="action" value="active">
+        <input type="submit" value="Make Active" class="btn btn-primary">
+    {% endif %}
+</form>
+
+
+
 <form method="post">
     {% csrf_token %}
     <input type="hidden" name="action" value="update">
