@@ -1,4 +1,4 @@
-Django==2.2.3
+Django==2.2.4
 requests==2.22.0
 psycopg2==2.8.3
 commonmark==0.9.0
@@ -7,6 +7,6 @@ certifi==2019.6.16
 chardet==3.0.4
 future==0.17.1
 idna==2.8
-pytz==2019.1
+pytz==2019.2
 sqlparse==0.3.0
 urllib3==1.25.3
