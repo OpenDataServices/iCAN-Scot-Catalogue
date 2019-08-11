@@ -2,6 +2,11 @@
 
 {% block content %}
 
+    <form method="get">
+        Search: <input name="search" value="{{ search }}">
+        <input type="submit" value="Search">
+    </form>
+
     <div class="organisationList">
         {% for organisation in organisations %}
             <div class="organisation">

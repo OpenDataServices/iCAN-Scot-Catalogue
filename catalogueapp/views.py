@@ -8,14 +8,40 @@ from catalogueapp.models import Service, Organisation
 
 def index(request):
     context = {
-        'organisations': Organisation.objects.raw(
-            "SELECT catalogueapp_organisation.* FROM catalogueapp_organisation " +
-            "JOIN catalogueapp_service ON catalogueapp_service.organisation_id = catalogueapp_organisation.id " +
-            "WHERE catalogueapp_service.active = '1' " +
-            "GROUP BY catalogueapp_organisation.id " +
-            "ORDER BY catalogueapp_organisation.name ASC "
-        ),
+        'search': request.GET.get('search', ''),
     }
+
+    if context['search']:
+        context['organisations'] = Organisation.objects.raw(
+            """
+            SELECT * FROM (
+                SELECT catalogueapp_organisation.*,
+                to_tsvector(
+                    catalogueapp_organisation.name || ' ' ||
+                    catalogueapp_organisation.description || ' ' ||
+                    catalogueapp_organisation.our_description_markdown || ' ' ||
+                    array_agg(catalogueapp_service.name)::text || ' ' ||
+                    array_agg(catalogueapp_service.description)::text
+                ) AS search_vector
+                FROM catalogueapp_organisation
+                JOIN catalogueapp_service ON catalogueapp_service.organisation_id = catalogueapp_organisation.id
+                WHERE catalogueapp_service.active = '1'
+                GROUP BY catalogueapp_organisation.id
+                ORDER BY catalogueapp_organisation.name ASC
+            ) AS data
+            WHERE search_vector @@ to_tsquery(%s)
+            """,
+            [context['search']]
+        )
+    else:
+        context['organisations'] = Organisation.objects.raw(
+            """SELECT catalogueapp_organisation.* FROM catalogueapp_organisation
+            JOIN catalogueapp_service ON catalogueapp_service.organisation_id = catalogueapp_organisation.id
+            WHERE catalogueapp_service.active = '1'
+            GROUP BY catalogueapp_organisation.id
+            ORDER BY catalogueapp_organisation.name ASC """,
+        )
+
     return render(request, 'catalogueapp/index.html', context)
 
 
