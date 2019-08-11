@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.contrib.auth.decorators import permission_required, login_required
 from catalogueapp.forms import AddForm, EditOrganisationForm
 from catalogueapp.tools import ALISS_URL, ALISS_Importer
@@ -126,6 +126,18 @@ def admin_organisation_edit(request, aliss_id):
         context['form'] = EditOrganisationForm(instance=context['organisation'])
 
     return render(request, 'catalogueapp/admin/organisation/edit.html', context)
+
+
+@permission_required('catalogueapp.catalogueadmin', login_url='/accounts/login/')
+def admin_organisation_edit_preview(request, aliss_id):
+    context = {
+        'organisation': Organisation.objects.get(aliss_id=aliss_id),
+    }
+    context['organisation'].our_description_markdown = request.POST.get('description_markdown', '')
+
+    return JsonResponse(
+        {'description_markdown_html': context['organisation'].get_our_description_markdown_html()}
+    )
 
 
 @login_required()

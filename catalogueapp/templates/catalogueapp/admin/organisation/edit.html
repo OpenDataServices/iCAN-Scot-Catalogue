@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <form method="post" action="">
+    <form method="post" action="" id="edit_form">
         {% csrf_token %}
         <table>
             <tr>
@@ -13,7 +13,69 @@
             </tr>
         </table>
 
-        <input type="submit" value="Save">
+        <input type="submit" value="Save" class="btn btn-primary">
     </form>
+
+    <h3>Preview</h3>
+
+    <div id="preview" style="padding: 20px; margin: 20px; border: 1px solid black; background: #fcf4af;"></div>
+
+    <p>See <a href="https://commonmark.org/help/" target="_blank">this markdown reference for help</a>.</p>
+
+{% endblock %}
+
+{% block javascript %}
+
+    <script>
+
+        $( document ).ready(function() {
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                    }
+                }
+            });
+
+            $('#edit_form textarea').bind('input propertychange', getPreview)
+
+            getPreview();
+        });
+
+        var ajax;
+
+        function getPreview() {
+            if (ajax) {
+                ajax.abort();
+            }
+            ajax = $.ajax({
+                type: "POST",
+                url: "{% url 'admin_organisation_edit_preview' organisation.aliss_id %}",
+                data: {'description_markdown':$('#edit_form textarea').val()},
+                success: function(data) { $('#preview').html(data['description_markdown_html']); }
+            });
+        }
+
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+    </script>
 
 {% endblock %}
