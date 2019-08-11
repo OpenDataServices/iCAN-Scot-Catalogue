@@ -8,7 +8,13 @@ from catalogueapp.models import Service, Organisation
 
 def index(request):
     context = {
-        'services': Service.objects.filter(active=True),
+        'organisations': Organisation.objects.raw(
+            "SELECT catalogueapp_organisation.* FROM catalogueapp_organisation " +
+            "JOIN catalogueapp_service ON catalogueapp_service.organisation_id = catalogueapp_organisation.id " +
+            "WHERE catalogueapp_service.active = '1' " +
+            "GROUP BY catalogueapp_organisation.id " +
+            "ORDER BY catalogueapp_organisation.name ASC "
+        ),
     }
     return render(request, 'catalogueapp/index.html', context)
 

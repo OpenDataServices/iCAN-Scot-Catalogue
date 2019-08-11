@@ -3,9 +3,9 @@
 {% block content %}
 
     <div class="organisationList">
-        {% for service in services %}
+        {% for organisation in organisations %}
             <div class="organisation">
-                <div><a href="{% url 'organisation_index' service.organisation.aliss_id %}">{{ service.organisation.name }}</a></div>
+                <div><a href="{% url 'organisation_index' organisation.aliss_id %}">{{ organisation.name }}</a></div>
             </div>
         {% endfor %}
     </div>
